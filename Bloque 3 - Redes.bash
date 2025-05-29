@@ -16,14 +16,14 @@ ip route get [address]
 	ip route get 8.8.8.8
 
 DESABILITAR UNA ADAPTADOR DE RED
-ip link set [interface] down
+sudo ip link set [interface] down
 	ejemplo:
-	ip link set enp0s3 down
+	sudo ip link set enp0s3 down
 
 HABILITAR UN ADAPTADOR DE RED
-ip link set [interface] up
+sudo ip link set [interface] up
 	ejemplo:
-	ip link set enp0s3 up
+	sudo ip link set enp0s3 up
 
 OBTENER LA TABLA ARP
 ip neigh show
@@ -111,15 +111,17 @@ CAMBIAR LA IP A ESTÁTICA
 		nmcli connection show
 
 			Obtendremos:
-			NAME                UUID                                  TYPE            DEVICE 
-			Wired connection 1  a22284f7-b1dd-3bfc-b5c2-0cf9339916f6  802-3-ethernet  enp0s3
+			NAME    UUID                                  TYPE            DEVICE
+			enp0s3  4cb0dc57-e7bf-4ee9-90ef-0f644fab6ba4  802-3-ethernet  enp0s3
 
 		2. UNA VEZ IDENTIFICADA EL NOMBRE DE LA CONEXIÓN "Wired connection 1" SE EJECUTA LO SIGUIENTE EN CASO
 		   QUE SE DESEE ASIGNAR LA IP ESTÁTICA 192.168.2.112/24:
-		sudo nmcli connection modify "Wired connection 1" ipv4.addresses 192.168.2.112/24
-		sudo nmcli connection modify "Wired connection 1" ipv4.gateway 192.168.2.1
-		sudo nmcli connection modify "Wired connection 1" ipv4.dns "8.8.8.8 1.1.1.1"
-		sudo nmcli connection modify "Wired connection 1" ipv4.method manual
+			sudo nmcli connection modify "enp0s3" ipv4.addresses 192.168.2.2/24
+			sudo nmcli connection modify "enp0s3" ipv4.gateway 192.168.2.1
+			sudo nmcli connection modify "enp0s3" ipv4.dns "8.8.8.8 1.1.1.1"
+			sudo nmcli connection modify "enp0s3" ipv4.method manual
+			sudo nmcli connection up "enp0s3"
+
 
 		3. REINICIAMOS LA CONEXIÓN PARA APLICAR CAMBIOS:
 		sudo nmcli connection down "Wired connection 1" && sudo nmcli connection up "Wired connection 1"

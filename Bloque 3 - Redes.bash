@@ -1,6 +1,40 @@
 OBTENER LA IP DEL EQUIPO
 hostname -I
 
+OBTENER LA IP DEL EQUIPO
+ifconfig
+
+OBTENER LA IP DEL EQUIPO
+ip address show
+
+OBTENER IP DE ENRRUTAMIENTO
+ip route show
+
+OBTENER LA PUERTA DE ENLACE ATRAVES DE UNA RED
+ip route get [address]
+	ejemplo:
+	ip route get 8.8.8.8
+
+DESABILITAR UNA ADAPTADOR DE RED
+ip link set [interface] down
+	ejemplo:
+	ip link set enp0s3 down
+
+HABILITAR UN ADAPTADOR DE RED
+ip link set [interface] up
+	ejemplo:
+	ip link set enp0s3 up
+
+OBTENER LA TABLA ARP
+ip neigh show
+
+VER LAS ESTADÍSTICAS DEL ADAPTADOR DE RED
+ip -s link
+
+VER LOS PUERTOS LISTENER
+ss -ltpan
+
+
 CAMBIAR LA IP A ESTÁTICA
 	MÉTODO 1: ARCHIVO INTERFACES
 			1. PRIMERO IDENTIFICAR LA INTERFAZ DE RED

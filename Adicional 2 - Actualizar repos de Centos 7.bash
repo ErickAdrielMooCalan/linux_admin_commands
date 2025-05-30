@@ -3,29 +3,32 @@ MODICAR EL ARCHIVO
 
 BORRAR TODO EL CONTENIDO Y AGREGAR LO SIGUIENTE:
     [base]
-    name=CentOS-$releasever - Base - mirrors.aliyun.com
-    baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+    name=CentOS-$releasever - Base
+    baseurl=https://vault.centos.org/7.9.2009/os/$basearch/
     gpgcheck=1
-    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    enabled=1
 
     [updates]
-    name=CentOS-$releasever - Updates - mirrors.aliyun.com
-    baseurl=http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/
+    name=CentOS-$releasever - Updates
+    baseurl=https://vault.centos.org/7.9.2009/updates/$basearch/
     gpgcheck=1
-    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    enabled=1
 
     [extras]
-    name=CentOS-$releasever - Extras - mirrors.aliyun.com
-    baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+    name=CentOS-$releasever - Extras
+    baseurl=https://vault.centos.org/7.9.2009/extras/$basearch/
     gpgcheck=1
-    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    enabled=1
 
     [centosplus]
-    name=CentOS-$releasever - Plus - mirrors.aliyun.com
-    baseurl=http://mirrors.aliyun.com/centos/$releasever/centosplus/$basearch/
+    name=CentOS-$releasever - CentOSPlus
+    baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/
     gpgcheck=1
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
     enabled=0
-    gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
 
 
 EJECUTAR LO SIGUIENTE:

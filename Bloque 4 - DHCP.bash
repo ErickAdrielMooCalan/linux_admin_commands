@@ -1,19 +1,24 @@
 1. INSTALAR EL SERVICIO DE DHCP
-sudo apt install isc-dhcp-server
+sudo apt install isc-dhcp-server #Ubuntu/Debian
+sudo yum install dhcp #CentOS
 
 2. ABRIMOS EL ARCHIVO DE CONFIGURACIÓN
-sudo nano /etc/default/isc-dhcp-server
+sudo nano /etc/default/isc-dhcp-server #Ubuntu/Debian
+sudo nano /etc/sysconfig/dhcpd #CentOS
+
 
 AL FINAL DEL ARCHIVOS AGREGAMOS EL ADAPTADOR DE RED
     Obteniendo:
         # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
         #Separate multiple interfaces with spaces, e.g. "eth0 eth1".
-        INTERFACES="enp0s3"
+        INTERFACES="enp0s3" #Ubuntu/Debian
+        DHCPDARGS="enp0s3" #CentOS
 
     GUARDAMOS CON CTRL O, ENTER Y CTRL X
 
 3. NOS DIRIGIMOS AL ARCHIVO
-sudo nano /etc/dhcp/dhcpd.conf
+sudo nano /etc/dhcp/dhcpd.conf #Ubuntu/Debian
+sudo nano /etc/dhcp/dhcpd.conf #CentOS
 
 4. EN EL ARCHIVO VAMOS A ENCONTRAR ESTA SECCIÓN:
 subnet 192.168.2.0 netmask 255.255.255.0 {
@@ -33,7 +38,9 @@ subnet 192.168.2.0 netmask 255.255.255.0 {
         6. option domain-name-servers: Indica las direcciones IP de los servidores DNS que los clientes usarán para resolver nombres de dominio (por ejemplo, convertir www.google.com en una IP).
 
 5. INICIAMOS EL SERVICIO
-sudo systemctl start isc-dhcp-server
+sudo systemctl start isc-dhcp-server #Ubuntu/Debian
+sudo systemctl start dhcpd #CentOS
 
 6. VERIFICAMOS EL STATUS DEL SERVIDOR
-sudo systemctl status isc-dhcp-server
+sudo systemctl status isc-dhcp-server #Ubuntu/Debian
+sudo systemctl status dhcpd #CentOS

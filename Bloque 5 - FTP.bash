@@ -128,3 +128,13 @@ significa que la carpeta raíz del usuario es escribible.
 Solución: cambiar permisos a chmod 555 /home/mainserver/FTPFolder/<usuario>
 
 El directorio raíz del usuario virtual no debe ser escribible, pero las subcarpetas donde se cargan archivos sí deben serlo y deben pertenecer al usuario contenedor (ftpvirtual).
+
+
+CONTECTAR DESDE EL EXPLORADOR DE LINUX
+ftp://192.168.2.2
+
+CONECTAR DESDE EL EXPLORADOR DE ARCHIVOS DE WINDOWS
+ftp://192.168.2.2
+
+SI QUISIERAMOS QUE "userftp" SOLO TENGA PERMISOS DE LECTURA
+sudo chmod 555 /home/mainserver/FTPFolder/userftp/files

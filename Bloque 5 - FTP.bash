@@ -24,28 +24,35 @@
 
 7. CREAR LAS CARPETAS PARA CADA USUARIO VIRTUAL, EJEMPLO PARA EL USUARIO "adminftp"
     sudo mkdir -p /home/mainserver/FTPFolder/adminftp/files #Carpeta usuario adminftp
-    sudo mkdir -p /home/mainserver/FTPFolder/userftp/files #Carpeta para el usuario userfpt
+    sudo mkdir -p /home/mainserver/FTPFolder/userftp/files #Carpeta para el usuario userftp
 
-8. DAR LOS PERMISOS CORRECTOS PARA EVITAR EL ERROR 500
-    sudo chmod 555 /home/mainserver/FTPFolder/adminftp #Carpeta usuario adminftp
-    sudo chmod 555 /home/mainserver/FTPFolder/userftp #Carpeta para el usuario userfpt
+8. ASIGNAR LOS PERMISOS CORRECTOS PARA EVITAR EL ERROR 500
+    #Usuario adminftp
+    sudo chown ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/adminftp
+    sudo chmod 555 /home/mainserver/FTPFolder/adminftp
 
-        NOTA: PERMISOS PARA LAS SUBCARPETAS SI QUEREMOS QUE EL USUARIO PUEDA ESCRIBIR
-            sudo chown -R ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/adminftp/files #Carpeta usuario adminftp
-            sudo chmod 755 /home/mainserver/FTPFolder/adminftp/files #Carpeta usuario adminftp
+    #Usuario userftp
+    sudo chown ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/userftp
+    sudo chmod 555 /home/mainserver/FTPFolder/userftp
 
-            sudo chown -R ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/userftp/files #Carpeta para el usuario userfpt
-            sudo chmod 755 /home/mainserver/FTPFolder/userftp/files #Carpeta para el usuario userfpt
+9. ASIGNAR PERMISOS DE ESCRITURA A LAS SUBCARPETAS DE CADA USUARIO
+    #Usuario adminftp
+    sudo chown -R ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/adminftp/files
+    sudo chmod 755 /home/mainserver/FTPFolder/adminftp/files
 
-9. CREAR EL USUARIO DEL SISTEMA QUE ACTUARÁ COMO CONTENEDOR DE LOS USUARIOS VIRTUALES
+    #Usuario userftp
+    sudo chown -R ftpvirtual:ftpvirtual /home/mainserver/FTPFolder/userftp/files
+    sudo chmod 755 /home/mainserver/FTPFolder/userftp/files
+
+10. CREAR EL USUARIO DEL SISTEMA QUE ACTUARÁ COMO CONTENEDOR DE LOS USUARIOS VIRTUALES
     sudo useradd -d /home/ftp_virtual -s /sbin/nologin ftpvirtual
     sudo mkdir -p /home/ftp_virtual
     sudo chown ftpvirtual:ftpvirtual /home/ftp_virtual
 
-10. DAR PROPIEDAD AL USUARIO CONTENEDOR SOBRE LA CARPETA FTP
+11. DAR PROPIEDAD AL USUARIO CONTENEDOR SOBRE LA CARPETA FTP
     sudo chown -R ftpvirtual:ftpvirtual /home/mainserver/FTPFolder
 
-11. CREAR EL ARCHIVO DE USUARIOS VIRTUALES Y CONTRASEÑAS
+12. CREAR EL ARCHIVO DE USUARIOS VIRTUALES Y CONTRASEÑAS
     sudo touch /etc/vsftpd/virtual_users.txt
     sudo nano /etc/vsftpd/virtual_users.txt
 
@@ -55,11 +62,11 @@
             userftp
             123456
 
-12. CONVIERTE EL ARCHIVO TXT A DB PARA PAM
+13. CONVIERTE EL ARCHIVO TXT A DB PARA PAM
     sudo db_load -T -t hash -f /etc/vsftpd/virtual_users.txt /etc/vsftpd/virtual_users.db
     sudo chmod 600 /etc/vsftpd/virtual_users.*
 
-13. CONFIGURA PAM PARA USUARIOS VIRTUALES
+14. CONFIGURA PAM PARA USUARIOS VIRTUALES
     sudo nano /etc/pam.d/vsftpd #CentOS
     sudo nano /etc/pam.d/vsftpd-virtual #Ubuntu/Debian
 
@@ -67,7 +74,7 @@
             auth required pam_userdb.so db=/etc/vsftpd/virtual_users
             account required pam_userdb.so db=/etc/vsftpd/virtual_users
 
-14. CONFIGURAMOS EL ARCHIVO VSFTPD.CONF
+15. CONFIGURAMOS EL ARCHIVO VSFTPD.CONF
     sudo nano /etc/vsftpd/vsftpd.conf
 
         DEBE QUEDAR DE LA SIGUIENTE MANERA:
@@ -97,11 +104,11 @@
             # Lista de usuarios permitidos
             userlist_enable=YES
 
-15. INSTALAR EL CLIENTE FPT PARA PRUEBAS
+16. INSTALAR EL CLIENTE FPT PARA PRUEBAS
     sudo yum install ftp -y # CentOS
     sudo apt install ftp -y  # Ubuntu/Debian
 
-16 DESDE OTRO EQUIPO (LINUX) DESDE LA TERMINAL PROBAMOS LA CONEXIÓN
+17 DESDE OTRO EQUIPO (LINUX) DESDE LA TERMINAL PROBAMOS LA CONEXIÓN
     ftp 192.168.2.2
 
         RESULTADO:
